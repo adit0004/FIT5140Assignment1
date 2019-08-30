@@ -11,6 +11,16 @@
 		2A5C72CB23195482005C99FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C72C923195482005C99FB /* Main.storyboard */; };
 		2A5C72CD23195484005C99FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C72CC23195484005C99FB /* Assets.xcassets */; };
 		2A5C72D023195484005C99FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C72CE23195484005C99FB /* LaunchScreen.storyboard */; };
+		2A5C72D823195A66005C99FB /* LocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72D723195A66005C99FB /* LocationTableViewController.swift */; };
+		2A5C72DA23195A75005C99FB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72D923195A75005C99FB /* MapViewController.swift */; };
+		2A5C72DC23195A82005C99FB /* LocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72DB23195A82005C99FB /* LocationAnnotation.swift */; };
+		2A5C72DE23196149005C99FB /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72DD23196149005C99FB /* LocationTableViewCell.swift */; };
+		2A5C72E223198AC8005C99FB /* MelbourneHistory.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72E023198AC7005C99FB /* MelbourneHistory.xcdatamodeld */; };
+		2A5C72E523198B32005C99FB /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72E323198B32005C99FB /* Location+CoreDataClass.swift */; };
+		2A5C72E623198B32005C99FB /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72E423198B32005C99FB /* Location+CoreDataProperties.swift */; };
+		2A5C72E923198B69005C99FB /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72E823198B69005C99FB /* DatabaseProtocol.swift */; };
+		2A5C72EB23198D43005C99FB /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72EA23198D43005C99FB /* MulticastDelegate.swift */; };
+		2A5C72ED23198DC2005C99FB /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72EC23198DC2005C99FB /* CoreDataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +30,16 @@
 		2A5C72CC23195484005C99FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A5C72CF23195484005C99FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A5C72D123195484005C99FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A5C72D723195A66005C99FB /* LocationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewController.swift; sourceTree = "<group>"; };
+		2A5C72D923195A75005C99FB /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		2A5C72DB23195A82005C99FB /* LocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotation.swift; sourceTree = "<group>"; };
+		2A5C72DD23196149005C99FB /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
+		2A5C72E123198AC7005C99FB /* MelbourneHistory.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MelbourneHistory.xcdatamodel; sourceTree = "<group>"; };
+		2A5C72E323198B32005C99FB /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2A5C72E423198B32005C99FB /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2A5C72E823198B69005C99FB /* DatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
+		2A5C72EA23198D43005C99FB /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
+		2A5C72EC23198DC2005C99FB /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,13 +72,39 @@
 		2A5C72C423195482005C99FB /* FIT5140Assignment1 */ = {
 			isa = PBXGroup;
 			children = (
+				2A5C72E723198B50005C99FB /* Database */,
+				2A5C72DF23198A7F005C99FB /* DataModel */,
 				2A5C72C523195482005C99FB /* AppDelegate.swift */,
 				2A5C72C923195482005C99FB /* Main.storyboard */,
+				2A5C72DD23196149005C99FB /* LocationTableViewCell.swift */,
+				2A5C72D723195A66005C99FB /* LocationTableViewController.swift */,
+				2A5C72D923195A75005C99FB /* MapViewController.swift */,
+				2A5C72DB23195A82005C99FB /* LocationAnnotation.swift */,
 				2A5C72CC23195484005C99FB /* Assets.xcassets */,
 				2A5C72CE23195484005C99FB /* LaunchScreen.storyboard */,
 				2A5C72D123195484005C99FB /* Info.plist */,
 			);
 			path = FIT5140Assignment1;
+			sourceTree = "<group>";
+		};
+		2A5C72DF23198A7F005C99FB /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				2A5C72E323198B32005C99FB /* Location+CoreDataClass.swift */,
+				2A5C72E423198B32005C99FB /* Location+CoreDataProperties.swift */,
+				2A5C72E023198AC7005C99FB /* MelbourneHistory.xcdatamodeld */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		2A5C72E723198B50005C99FB /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				2A5C72E823198B69005C99FB /* DatabaseProtocol.swift */,
+				2A5C72EA23198D43005C99FB /* MulticastDelegate.swift */,
+				2A5C72EC23198DC2005C99FB /* CoreDataController.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,7 +178,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A5C72E623198B32005C99FB /* Location+CoreDataProperties.swift in Sources */,
+				2A5C72E523198B32005C99FB /* Location+CoreDataClass.swift in Sources */,
+				2A5C72D823195A66005C99FB /* LocationTableViewController.swift in Sources */,
+				2A5C72DE23196149005C99FB /* LocationTableViewCell.swift in Sources */,
+				2A5C72E223198AC8005C99FB /* MelbourneHistory.xcdatamodeld in Sources */,
+				2A5C72DA23195A75005C99FB /* MapViewController.swift in Sources */,
+				2A5C72ED23198DC2005C99FB /* CoreDataController.swift in Sources */,
 				2A5C72C623195482005C99FB /* AppDelegate.swift in Sources */,
+				2A5C72EB23198D43005C99FB /* MulticastDelegate.swift in Sources */,
+				2A5C72DC23195A82005C99FB /* LocationAnnotation.swift in Sources */,
+				2A5C72E923198B69005C99FB /* DatabaseProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +386,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2A5C72E023198AC7005C99FB /* MelbourneHistory.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2A5C72E123198AC7005C99FB /* MelbourneHistory.xcdatamodel */,
+			);
+			currentVersion = 2A5C72E123198AC7005C99FB /* MelbourneHistory.xcdatamodel */;
+			path = MelbourneHistory.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2A5C72BA23195482005C99FB /* Project object */;
 }
