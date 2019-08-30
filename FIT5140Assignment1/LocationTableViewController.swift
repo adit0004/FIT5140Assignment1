@@ -8,23 +8,58 @@
 
 import UIKit
 
-class LocationTableViewController: UITableViewController {
-
+class LocationTableViewController: UITableViewController, DatabaseListener, UISearchResultsUpdating {
+    var listenerType: ListenerType = ListenerType.locations
+    
+    var locationList:[Location] = []
+    var filteredLocations:[Location] = []
     var mapViewController:MapViewController?
-    var locationList = [LocationAnnotation]()
+    weak var databaseController: DatabaseProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        databaseController = appDelegate.databaseController
+        
         // Do any additional setup after loading the view.
         
-        // TODO: These are hardcoded for the initial prototype, replace these with coreData loaded locations
-        var location = LocationAnnotation(newTitle: "Koorie Heritage Trust", newSubtitle: "The Koorie Heritage Trust is a bold and adventurous 21st century Aboriginal arts and cultural organisation.\nThe Koorie Heritage Trust offers an inclusive and engaging environment for all visitors. As an Aboriginal owned and managed organisation, they take great pride in their ability to develop and deliver an authentic and immersive urban Aboriginal arts and cultural experience in a culturally safe environment that cannot be duplicated by any other arts and cultural organisation in Melbourne.\nIn doing so, the trust contributes to Melbourne as a creative city that embraces Aboriginal and Torres Strait Islander people, their history and culture.\nThe Koorie Heritage Trust welcomes non-Indigenous people and invites them to learn about Victoria's Indigenous cultural heritage. The Trust have an annual program of changing exhibitions showing the work of contemporary Indigenous artists, as well as a display of works from their artworks and artefacts permanent collection.\nThe Koorie Heritage Trust offers a range of cultural education and tours including cultural walks such as The River Walk, an historical and cultural tour along the Birrarung (Yarra River) and an exploration of the installations at Birrarung Marr (Common Ground). There is a fee for tours and bookings are required.", latitude: 	-37.877623, longitude: 145.045374, category: "Arts & Culture")
-        locationList.append(location)
-        mapViewController?.mapView.addAnnotation(location)
-        location = LocationAnnotation(newTitle: "Melbourne's Tall Ship - Enterprize", newSubtitle: "Step aboard Melbourne's Tall Ship Enterprize and step back to a time of daring voyages and discovery. Feel the romance and excitement of sailing with the wind in your hair as you take in spectacular views of Melbourne's skyline, Port Phillip Bay and Australia's spectacular southern coast.\nExperience history on a magnificent handcrafted replica of John Pascoe Faulkner's Enterprize, the ship that brought the first permanent European settlers to Melbourne in 1835. Discover life as an early explorer and uncover the tale of ambition, intrigue and rivalry that led to Melbourne's foundation. Relax on deck or hoist the sails, steer the ship and climb the rigging for heart stopping thrills.\nEnterprize has monthly public sails from Docklands, Williamstown, Mornington and Geelong, with sails from Portarlington during peak season and special events, such as the Mussel and Celtic Festivals.", latitude:  -37.819563, longitude: 144.935681, category: "Water Sport")
-        locationList.append(location)
-        mapViewController?.mapView.addAnnotation(location)
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search for locations"
+        navigationItem.searchController = searchController
+        
+        definesPresentationContext = true
+        
+    }
+
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text?.lowercased(), searchText.count > 0 {
+            filteredLocations = locationList.filter({(location: Location) -> Bool in
+                return (location.locationName?.lowercased().contains(searchText))!
+            })
+        }
+        else {
+            filteredLocations = locationList;
+        }
+        
+        tableView.reloadData();
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        databaseController?.addListener(listener: self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        databaseController?.removeListener(listener: self)
+    }
+    
+    func onLocationsChange(change: DatabaseChange, locations: [Location]) {
+        locationList = locations
+        updateSearchResults(for: navigationItem.searchController!)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -37,12 +72,14 @@ class LocationTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let locationCell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as! LocationTableViewCell
-        let location = locationList[indexPath.row]
+        
+        let locationObj = locationList[indexPath.row]
+        let location:LocationAnnotation = LocationAnnotation(newTitle: locationObj.locationName!, newSubtitle: locationObj.locationDescription!, latitude: locationObj.latitude, longitude: locationObj.longitude, category: locationObj.locationCategory!)
         locationCell.locationNameLabel.text = location.title
         locationCell.locationDescriptionLabel.text = location.subtitle
         
         // Try checking if a named xcasset exists
-        var imageToSet:UIImage? = UIImage(named: location.title!)
+        var imageToSet:UIImage? = UIImage(named: locationObj.imagePathOrName!)
         // If xcasset is nil, try fetching content of file
         if (imageToSet == nil) {
             // TODO: fetch from file

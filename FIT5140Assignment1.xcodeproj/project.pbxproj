@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		227AD1732319B1BB009EEC88 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227AD1712319B1BB009EEC88 /* Location+CoreDataClass.swift */; };
+		227AD1742319B1BB009EEC88 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227AD1722319B1BB009EEC88 /* Location+CoreDataProperties.swift */; };
 		2A5C72C623195482005C99FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72C523195482005C99FB /* AppDelegate.swift */; };
 		2A5C72CB23195482005C99FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C72C923195482005C99FB /* Main.storyboard */; };
 		2A5C72CD23195484005C99FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A5C72CC23195484005C99FB /* Assets.xcassets */; };
@@ -16,14 +18,14 @@
 		2A5C72DC23195A82005C99FB /* LocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72DB23195A82005C99FB /* LocationAnnotation.swift */; };
 		2A5C72DE23196149005C99FB /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72DD23196149005C99FB /* LocationTableViewCell.swift */; };
 		2A5C72E223198AC8005C99FB /* MelbourneHistory.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72E023198AC7005C99FB /* MelbourneHistory.xcdatamodeld */; };
-		2A5C72E523198B32005C99FB /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72E323198B32005C99FB /* Location+CoreDataClass.swift */; };
-		2A5C72E623198B32005C99FB /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72E423198B32005C99FB /* Location+CoreDataProperties.swift */; };
 		2A5C72E923198B69005C99FB /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72E823198B69005C99FB /* DatabaseProtocol.swift */; };
 		2A5C72EB23198D43005C99FB /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72EA23198D43005C99FB /* MulticastDelegate.swift */; };
 		2A5C72ED23198DC2005C99FB /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5C72EC23198DC2005C99FB /* CoreDataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		227AD1712319B1BB009EEC88 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		227AD1722319B1BB009EEC88 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		2A5C72C223195482005C99FB /* FIT5140Assignment1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FIT5140Assignment1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A5C72C523195482005C99FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A5C72CA23195482005C99FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -35,8 +37,6 @@
 		2A5C72DB23195A82005C99FB /* LocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotation.swift; sourceTree = "<group>"; };
 		2A5C72DD23196149005C99FB /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		2A5C72E123198AC7005C99FB /* MelbourneHistory.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MelbourneHistory.xcdatamodel; sourceTree = "<group>"; };
-		2A5C72E323198B32005C99FB /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
-		2A5C72E423198B32005C99FB /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2A5C72E823198B69005C99FB /* DatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
 		2A5C72EA23198D43005C99FB /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		2A5C72EC23198DC2005C99FB /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
@@ -90,8 +90,8 @@
 		2A5C72DF23198A7F005C99FB /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				2A5C72E323198B32005C99FB /* Location+CoreDataClass.swift */,
-				2A5C72E423198B32005C99FB /* Location+CoreDataProperties.swift */,
+				227AD1712319B1BB009EEC88 /* Location+CoreDataClass.swift */,
+				227AD1722319B1BB009EEC88 /* Location+CoreDataProperties.swift */,
 				2A5C72E023198AC7005C99FB /* MelbourneHistory.xcdatamodeld */,
 			);
 			path = DataModel;
@@ -178,16 +178,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A5C72E623198B32005C99FB /* Location+CoreDataProperties.swift in Sources */,
-				2A5C72E523198B32005C99FB /* Location+CoreDataClass.swift in Sources */,
 				2A5C72D823195A66005C99FB /* LocationTableViewController.swift in Sources */,
 				2A5C72DE23196149005C99FB /* LocationTableViewCell.swift in Sources */,
+				227AD1742319B1BB009EEC88 /* Location+CoreDataProperties.swift in Sources */,
 				2A5C72E223198AC8005C99FB /* MelbourneHistory.xcdatamodeld in Sources */,
 				2A5C72DA23195A75005C99FB /* MapViewController.swift in Sources */,
 				2A5C72ED23198DC2005C99FB /* CoreDataController.swift in Sources */,
 				2A5C72C623195482005C99FB /* AppDelegate.swift in Sources */,
 				2A5C72EB23198D43005C99FB /* MulticastDelegate.swift in Sources */,
 				2A5C72DC23195A82005C99FB /* LocationAnnotation.swift in Sources */,
+				227AD1732319B1BB009EEC88 /* Location+CoreDataClass.swift in Sources */,
 				2A5C72E923198B69005C99FB /* DatabaseProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
