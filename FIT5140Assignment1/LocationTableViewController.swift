@@ -8,20 +8,15 @@
 
 import UIKit
 
-class LocationTableViewController: UITableViewController, DatabaseListener, UISearchResultsUpdating {
+class LocationTableViewController: UITableViewController, UISearchResultsUpdating {
     var listenerType: ListenerType = ListenerType.locations
-    
     var locationList:[Location] = []
     var filteredLocations:[Location] = []
     var mapViewController:MapViewController?
-    weak var databaseController: DatabaseProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        databaseController = appDelegate.databaseController
-        
         // Do any additional setup after loading the view.
         
         let searchController = UISearchController(searchResultsController: nil)
@@ -47,21 +42,6 @@ class LocationTableViewController: UITableViewController, DatabaseListener, UISe
         tableView.reloadData();
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        databaseController?.addListener(listener: self)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        databaseController?.removeListener(listener: self)
-    }
-    
-    func onLocationsChange(change: DatabaseChange, locations: [Location]) {
-        locationList = locations
-        updateSearchResults(for: navigationItem.searchController!)
-    }
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -73,13 +53,12 @@ class LocationTableViewController: UITableViewController, DatabaseListener, UISe
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let locationCell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as! LocationTableViewCell
         
-        let locationObj = locationList[indexPath.row]
-        let location:LocationAnnotation = LocationAnnotation(newTitle: locationObj.locationName!, newSubtitle: locationObj.locationDescription!, latitude: locationObj.latitude, longitude: locationObj.longitude, category: locationObj.locationCategory!)
-        locationCell.locationNameLabel.text = location.title
-        locationCell.locationDescriptionLabel.text = location.subtitle
+        let location = locationList[indexPath.row]
+        locationCell.locationNameLabel.text = location.locationName
+        locationCell.locationDescriptionLabel.text = location.locationDescription
         
         // Try checking if a named xcasset exists
-        var imageToSet:UIImage? = UIImage(named: locationObj.imagePathOrName!)
+        var imageToSet:UIImage? = UIImage(named: location.imagePathOrName!)
         // If xcasset is nil, try fetching content of file
         if (imageToSet == nil) {
             // TODO: fetch from file
