@@ -14,6 +14,7 @@ class SightDetailsViewController: UIViewController {
     var locationName: String?
     var locationDescription: String?
     var locationAddress: String?
+    var locationCategory:String?
     
     @IBAction func closeWindowButton(_ sender: Any) {
     }
@@ -21,6 +22,7 @@ class SightDetailsViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
     
     @IBOutlet weak var descriptionLabel: UILabel!
     override func viewDidLoad() {
@@ -32,12 +34,13 @@ class SightDetailsViewController: UIViewController {
         nameLabel.text = locationName
         addressLabel.text = locationAddress
         descriptionLabel.text = locationDescription
+        categoryLabel.text = locationCategory
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let totalContentHeight = imageView.frame.height + nameLabel.frame.height + addressLabel.frame.height + descriptionLabel.frame.height
-        scrollView.contentSize = CGSize(width: 375, height: totalContentHeight + 30)
+        let totalContentHeight = imageView.frame.height + nameLabel.frame.height + addressLabel.frame.height + descriptionLabel.frame.height + categoryLabel.frame.height
+        scrollView.contentSize = CGSize(width: 375, height: totalContentHeight + 50)
     }
     /*
     // MARK: - Navigation

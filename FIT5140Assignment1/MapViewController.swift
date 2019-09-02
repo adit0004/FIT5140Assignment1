@@ -129,7 +129,7 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        var castedAnnotation = view.annotation as! LocationAnnotation
+        let castedAnnotation = view.annotation as! LocationAnnotation
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let sightDetailViewController:SightDetailsViewController = storyboard.instantiateViewController(withIdentifier: "sightDetailsController") as! SightDetailsViewController
@@ -147,6 +147,7 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
         }
         sightDetailViewController.locationImage = imageToSend
         sightDetailViewController.locationAddress = castedAnnotation.address
+        sightDetailViewController.locationCategory = castedAnnotation.subtitle
         appDelegate.navigationView?.pushViewController(sightDetailViewController, animated: true)
 
     }

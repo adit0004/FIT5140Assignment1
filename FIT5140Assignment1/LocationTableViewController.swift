@@ -13,13 +13,14 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
     var locationList:[Location] = []
     var filteredLocations:[Location] = []
     var mapViewController:MapViewController?
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        filteredLocations = locationList
         // Do any additional setup after loading the view.
         
-        let searchController = UISearchController(searchResultsController: nil)
+        
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search for locations"
@@ -33,9 +34,9 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
     }
 
     func updateSearchResults(for searchController: UISearchController) {
-        if let searchText = searchController.searchBar.text?.lowercased(), searchText.count > 0 {
+        if let searchText = searchController.searchBar.text, searchText.count > 0 {
             filteredLocations = locationList.filter({(location: Location) -> Bool in
-                return (location.locationName?.lowercased().contains(searchText))!
+                return (location.locationName?.contains(searchText))!
             })
         }
         else {
@@ -50,13 +51,30 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering() {
+            return filteredLocations.count
+        }
         return locationList.count
+    }
+    
+    // Private function to check if filter is active
+    
+    // Followed tutorial from here: https://www.raywenderlich.com/472-uisearchcontroller-tutorial-getting-started
+    func isFiltering() -> Bool {
+        return !(searchController.isActive && (searchController.searchBar.text?.isEmpty ?? true))
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let locationCell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as! LocationTableViewCell
+        print(isFiltering())
+        let location:Location
+        if isFiltering() {
+            location = filteredLocations[indexPath.row]
+        }
+        else {
+            location = locationList[indexPath.row]
+        }
         
-        let location = locationList[indexPath.row]
         locationCell.locationNameLabel.text = location.locationName
         locationCell.locationDescriptionLabel.text = location.locationDescription
         
@@ -94,6 +112,7 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
         mapViewController?.latToZoomOn = location.latitude
         mapViewController?.longToZoomOn = location.longitude
     }
+   
     
 
     /*
