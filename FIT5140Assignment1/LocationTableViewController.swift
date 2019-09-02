@@ -27,6 +27,9 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
         
         definesPresentationContext = true
         
+        // Assign mapViewController to the mapView variable from appDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        mapViewController = appDelegate.mapView
     }
 
     func updateSearchResults(for searchController: UISearchController) {
@@ -81,6 +84,16 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
         }
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Create annotation before trying to focus on it?
+        let location = locationList[indexPath.row]
+        print("Click happened")
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let navigationView = appDelegate.navigationView
+        navigationView?.popViewController(animated: true)
+        mapViewController?.latToZoomOn = location.latitude
+        mapViewController?.longToZoomOn = location.longitude
+    }
     
 
     /*
