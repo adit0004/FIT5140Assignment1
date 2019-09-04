@@ -20,6 +20,7 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
     var userLocation:CLLocationManager = CLLocationManager()
     var latToZoomOn: Double?
     var longToZoomOn: Double?
+    var locationsDeleted:[Location] = []
     
 
     @IBOutlet weak var mapView: MKMapView!
@@ -63,7 +64,6 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
     
     func onLocationsChange(change: DatabaseChange, locations: [Location]) {
         locationList = locations
-        
         for location in locationList {
             var locationAnnotation:LocationAnnotation
             locationAnnotation = LocationAnnotation(newTitle: location.locationName!, newSubtitle: location.locationCategory!, latitude: location.latitude, longitude: location.longitude, locationDescription: location.locationDescription!, address: location.locationAddress!, imagePathOrName: location.imagePathOrName!)
@@ -73,7 +73,6 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "AnnotationView")
-        
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "AnnotationView")
         }
@@ -163,6 +162,14 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
         super.viewWillAppear(animated)
         // Start tracking location
         userLocation.startUpdatingLocation()
+        
+        // Process deletes here
+        if !locationsDeleted.isEmpty {
+            for location in locationsDeleted {
+                databaseController?.deleteLocation(location: location)
+            }
+            locationsDeleted = []
+        }
         databaseController?.addListener(listener: self)
     }
     

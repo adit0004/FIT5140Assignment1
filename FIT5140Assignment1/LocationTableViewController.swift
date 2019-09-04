@@ -17,15 +17,16 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        filteredLocations = locationList
         // Do any additional setup after loading the view.
+
+        // Set filteredLocations to have contents of locationList initially
+        filteredLocations = locationList
         
-        
+        // Setup the search controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search for locations"
         navigationItem.searchController = searchController
-        
         definesPresentationContext = true
         
         // Assign mapViewController to the mapView variable from appDelegate
@@ -97,32 +98,21 @@ class LocationTableViewController: UITableViewController, UISearchResultsUpdatin
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            mapViewController?.locationsDeleted.append(filteredLocations[indexPath.row])
+            self.filteredLocations.remove(at:indexPath.row)
             self.locationList.remove(at:indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Create annotation before trying to focus on it?
         let location = locationList[indexPath.row]
-        print("Click happened")
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let navigationView = appDelegate.navigationView
-        navigationView?.popViewController(animated: true)
+        
+        // Remove this view, go back to where we came from (would be mapViewController, unless I messed up real bad)
+        self.navigationController!.popViewController(animated: true)
+        
+        // Set the lat, long to focus on mapViewController
         mapViewController?.latToZoomOn = location.latitude
         mapViewController?.longToZoomOn = location.longitude
     }
-   
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

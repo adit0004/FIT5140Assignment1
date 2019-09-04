@@ -65,6 +65,7 @@ class CoreDataController: NSObject, NSFetchedResultsControllerDelegate, Database
     func deleteLocation(location:Location) {
         persistentContainer.viewContext.delete(location)
         // TODO: Move this saveContext to screen change
+        print ("I AM HERE")
         saveContext()
     }
     

@@ -7,10 +7,11 @@
 //
 
 import UIKit
-
+import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var persistentContainer: NSPersistentContainer?
     var window: UIWindow?
     var databaseController: DatabaseProtocol?
     var mapView:MapViewController?
@@ -20,10 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         databaseController = CoreDataController()
         
+        persistentContainer = NSPersistentContainer(name:"MelbourneHistory")
+        persistentContainer?.loadPersistentStores() {(description,error) in
+            if let error = error {
+                fatalError("Oops! We had trouble loading data. Debug message: \(error)")
+            }
+        }
+        
         // Make sure the LocationTableViewController has access to MapViewController
-        navigationView = self.window!.rootViewController as! UINavigationController
+        navigationView = (self.window!.rootViewController as! UINavigationController)
         mapView = (navigationView!.viewControllers.first as! MapViewController)
-        print(mapView)
         return true
     }
 

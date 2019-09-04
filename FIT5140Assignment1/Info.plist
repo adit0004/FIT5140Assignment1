@@ -8,6 +8,10 @@
 	<string>Test</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Test</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Test</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Test</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
